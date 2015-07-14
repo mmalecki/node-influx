@@ -317,7 +317,12 @@ InfluxDB.prototype.writeSeries = function (series, options, callback) {
 }
 
 InfluxDB.prototype.writePoint = function (seriesName, values, tags, options, callback) {
-  if (typeof options === 'function') {
+  if (typeof tags === 'function') {
+    callback = tags
+    options = {}
+    tags = null
+  }
+  else if (typeof options === 'function') {
     callback = options
     options = {}
   }
